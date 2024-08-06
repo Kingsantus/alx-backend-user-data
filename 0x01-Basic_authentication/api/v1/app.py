@@ -47,13 +47,13 @@ def before_request_handler():
         forbidden_err(403)
 
 @app.errorhandler(401)
-def unauthorized_err(error):
+def unauthorized_err(error) -> str:
     """ Unauthorized handler
     """
     return jsonify({"error": "Unauthorized"}), 401
 
 @app.errorhandler(403)
-def forbidden_err(error):
+def forbidden_err(error) -> str:
     """ Forbidden handler
     """
     return jsonify({"error": "Forbidden"}), 403
