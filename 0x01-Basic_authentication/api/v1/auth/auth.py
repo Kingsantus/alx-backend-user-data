@@ -4,6 +4,7 @@
 from typing import List, TypeVar
 import re
 
+
 class Auth:
     """Class for handling authentication."""
 
@@ -15,7 +16,7 @@ class Auth:
 
         if not path or not excluded_paths:
             return True
-        
+
         if path[-1] != '/':
             path += '/'
 
@@ -36,4 +37,4 @@ class Auth:
 
     def current_user(self, request=None) -> TypeVar('User'):
         """TODO: implement"""
-        return None   
+        return None
