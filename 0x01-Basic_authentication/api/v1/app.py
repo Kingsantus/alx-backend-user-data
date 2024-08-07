@@ -54,9 +54,17 @@ def before_request_handler():
             abort(403)
 
 
+@app.errorhandler(404)
+def not_found(error) -> str:
+    """ Not found handler
+    """
+    return jsonify({"error": "Not found"}), 404
+
 @app.errorhandler(401)
 def unauthorized_err(error) -> str:
     """ Unauthorized handler
+    Return:
+        - error: Unauthorized
     """
     return jsonify({"error": "Unauthorized"}), 401
 
@@ -64,15 +72,10 @@ def unauthorized_err(error) -> str:
 @app.errorhandler(403)
 def forbidden_err(error) -> str:
     """ Forbidden handler
+    Return:
+        - error: Forbidden
     """
     return jsonify({"error": "Forbidden"}), 403
-
-
-@app.errorhandler(404)
-def not_found(error) -> str:
-    """ Not found handler
-    """
-    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
