@@ -10,7 +10,8 @@ from typing import TypeVar
 class BasicAuth(Auth):
     """ BasicAuth inherites from Auth. Basic authentication handling.
     """
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(
+            self, authorization_header: str) -> str:
         """ authorization_header in base64
         Return:
             -   other str excepts "Basic " or None
@@ -26,7 +27,8 @@ class BasicAuth(Auth):
 
         return authorization_header.split('Basic ', maxsplit=1)[1]
 
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
+    def decode_base64_authorization_header(
+            self, base64_authorization_header: str) -> str:
         """ Base for autherization header
         Return:
             -   decode value
@@ -46,7 +48,8 @@ class BasicAuth(Auth):
         except Exception:
             return None
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> (str, str):
+    def extract_user_credentials(
+            self, decoded_base64_authorization_header: str) -> (str, str):
         """ decode authorization header
         Returns:
             - tuple str of email:password
@@ -64,7 +67,8 @@ class BasicAuth(Auth):
 
         return email, password
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """ Validate user_email and user_password
         Return:
             -  User object or None user email don't match password
