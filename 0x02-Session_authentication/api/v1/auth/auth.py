@@ -3,6 +3,10 @@
 """
 from typing import List, TypeVar
 import re
+import os
+
+
+SESSION_NAME = '_my_session_id'
 
 
 class Auth:
@@ -38,3 +42,11 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """TODO: implement"""
         return None
+
+    def session_cookie(self, request=None):
+        """Returns a cookie value from a request"""
+
+        if not request:
+            return None
+        session_name = os.environ.get('SESSION_NAME')
+        return request.cookies.get(session_name)
