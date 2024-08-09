@@ -60,14 +60,16 @@ def before_request_handler():
             '/api/v1/forbidden/',
             '/api/v1/auth_session/login/']
 
-    if not auth.require_auth(request.path, excluded_paths):
-        return
-    else:
-        if not auth.authorization_header(request) and \
-                not auth.session_cookie(request):
-            abort(401)
+    if auth.require_auth(request.path, excluded):
+        cookie = auth.session_cookie(request)
 
-        if auth.current_user(request) is None:
+        if not auth.authorization_header(request) and not cookie:
+            # Neither using session nor basic auth
+            abort(401)
+        if auth.authorization_header(request) and auth.session_cookie(request):
+            # Can't use session and basic auth at the same time
+            abort(401)
+        if not auth.current_user(request):
             abort(403)
         request.current_user = auth.current_user(request)
 
