@@ -13,7 +13,10 @@ class SessionAuth(Auth):
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
-        """Creates a Session ID for a user_id"""
+        """Creates a Session ID for a user_id
+        Return
+            -   session_id
+        """
 
         if not user_id:
             return None
@@ -43,8 +46,15 @@ class SessionAuth(Auth):
         """Returns a User instance based on a cookie value"""
 
         session_id = self.session_cookie(request)
+        if not session_id:
+            return None
+
         user_id = self.user_id_by_session_id(session_id)
-        return User.get(user_id)
+        if not user_id:
+            return None
+
+        user = User.get(user_id)
+        return user
 
     def destroy_session(self, request=None):
         """Deletes the user session after logout"""
