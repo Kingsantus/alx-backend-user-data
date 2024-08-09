@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """ Basic Auth for Base64
 """
-from ..views.users import User
-from .auth import Auth
+# from api.v1.views.users import User
+from api.v1.auth.auth import Auth
 import base64
 from typing import TypeVar
 
@@ -73,6 +73,8 @@ class BasicAuth(Auth):
         Return:
             -  User object or None user email don't match password
         """
+        from api.v1.views.users import User
+
         if user_email is None or type(user_email) is not str:
             return None
 
