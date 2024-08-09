@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Handles the expiration date of Session ID"""
-from session_auth import SessionAuth
+from api.v1.auth.session_auth import SessionAuth
 import os
 from datetime import datetime, timedelta
 
