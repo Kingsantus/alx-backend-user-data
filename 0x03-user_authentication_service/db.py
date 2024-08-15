@@ -37,22 +37,18 @@ class DB:
         """add_user create a user"""
         # adding the requirement in the database described column
         new_user = User(email=email, hashed_password=hashed_password)
-
         self._session.add(new_user)
         self._session.commit()
-
         return new_user
 
-    def find_user_by(self, **kwargs) -> Optional[User]:
+    def find_user_by(self, **kwargs) -> User:
         """find user by get the first user information"""
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
-
             return user
         # if result not found
         except NoResultFound:
             raise NoResultFound("No user found with the given parameters")
-
         # if the argument is not found
         except InvalidRequestError:
             raise InvalidRequestError("Invalid query parameters")
