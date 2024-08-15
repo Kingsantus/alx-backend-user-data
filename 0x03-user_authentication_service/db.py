@@ -35,9 +35,6 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> List[str]:
         """add_user create a user"""
-        if email is None or hashed_password is None:
-            return None
-
         # adding the requirement in the database described column
         new_user = User(email=email, hashed_password=hashed_password)
 
